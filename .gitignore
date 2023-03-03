@@ -1,0 +1,47 @@
+# Cofniguration file
+src/main/resources/config/
+# Build output
+target/
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# IDE
+.idea/
+*.iml
+
+# macOS
+.DS_Store
+
+# Custom
+extensions.csproj
+.project
+devAtcPoc.iml
+.factorypath
+.classpath
+obj/
+.vscode/
+.settings/
+blackduck
+/local.settings.json
+/classpath.json
+/local.secrets.json
+/dependency-reduced-pom.xml
