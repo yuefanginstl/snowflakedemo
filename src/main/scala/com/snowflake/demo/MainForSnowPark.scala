@@ -5,9 +5,10 @@ import com.snowflake.snowpark._
 import com.snowflake.snowpark.functions._
 import org.apache.spark.sql.types.{FloatType, StringType, StructField}
 
+
 object MainForSnowPark {
   private lazy val snowFlakeConnectionInfo = ApplicationHelper.loadSnowflakeProperties
-  private lazy  val stage = "@json_data_stage"
+  private lazy  val stage = "@s3_json_stage"
   private lazy val tableName = "ev_data_by_snowpark"
 
   def copyFileFromLocalIntoStage(session: Session, localFile: String, stageName: String) = {
@@ -28,13 +29,13 @@ object MainForSnowPark {
     )
     val session = Session.builder.configs(configs).create
 
-    //copy local files into remote named stage on snowflake
-    //    val localFile = "file:///Users/lijuan.cao/studysnowflake/delta-writer/src/main/resources/electric_vehicle_population_data_1.json"
-    //    copyFileFromLocalIntoStage(session = session, localFile = localFile, stageName = stage)
 
     //read all json files under the stage into dataframe and convert into object(variant) data type
+    //val schema = com.snowflake.snowpark.types.StructType(Array(com.snowflake.snowpark.types.StructField("$1", com.snowflake.snowpark.types.VariantType)))
     val jsonDF = session
       .read
+      //.option("multiline", "true")
+      //.schema(schema)
       .json(stage)
       .select(to_object(col("$1")).as("value"))
     jsonDF.show()
